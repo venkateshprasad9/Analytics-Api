@@ -53,13 +53,13 @@ The API is built with Node.js, Express, MongoDB, and Redis. It's designed to han
 git clone [https://github.com/venkateshprasad9/Analytics-Api.git](https://github.com/venkateshprasad9/Analytics-Api.git)
 cd Analytics-Api
 
-3. Install Dependencies
+### 3. Install Dependencies
 npm install
 
-4. Set Up Environment Variables
+### 4. Set Up Environment Variables
 Create a .env file in the root of the project and add the following variables:
 
-Code snippet
+
 
 # Server
 NODE_ENV=development
@@ -79,10 +79,10 @@ GOOGLE_CLIENT_ID=<your-google-client-id>
 GOOGLE_CLIENT_SECRET=<your-google-client-secret>
 CALLBACK_URL=http://localhost:3000/api/auth/google/callback
 
-# Run the Server
+### 5. Run the Server
 npm run dev
 
-# Run the Tests
+### 6. Run the Tests
 npm test
 
 # Testing & Authentication Notes 
