@@ -9,8 +9,7 @@ The API is built with Node.js, Express, MongoDB, and Redis. It's designed to han
 ## 🚀 Live URLs
 
 * **Deployment URL:** `https://venky-analytics-api.onrender.com`
-* **API Documentation (Postman):** <a href="https://example.com" target="_blank">https://documenter.getpostman.com/view/26851597/2sB3WvMJHW</a>
-
+* **API Documentation (Postman):** `https://documenter.getpostman.com/view/26851597/2sB3WvMJHW`
 * **Health Check:** `https://venky-analytics-api.onrender.com/health`
 * **Primary Entry Point:** `https://venky-analytics-api.onrender.com/api/auth/google`
 ---
