@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -12,10 +10,10 @@ const passport = require('passport');
 dotenv.config();
 
 // --- Local Imports ---
-const connectDB = require('./utils/db'); 
+const connectDB = require('./utils/db');
 const authRoutes = require('./routes/authRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
-const rateLimiter = require('./utils/rateLimiter'); 
+const rateLimiter = require('./utils/rateLimiter');
 
 // --- Initialize Express App ---
 const app = express();
@@ -24,21 +22,33 @@ const app = express();
 connectDB();
 
 // --- Middleware Setup ---
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
-app.use(cors()); 
-app.use(helmet()); 
-app.use(morgan('dev')); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// --- Session Configuration ---
+// --- CORS Configuration (Production Ready) ---
+app.use(
+  cors({
+    origin: process.env.RENDER_EXTERNAL_URL, 
+    credentials: true, 
+  })
+);
+
+app.use(helmet());
+app.use(morgan('dev'));
+
+// --- Session Configuration (Production Ready) ---
+// Trust the first proxy (Render's proxy)
+app.set('trust proxy', 1);
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'a_very_strong_secret_key', // Use env variable
+    secret: process.env.SESSION_SECRET, // Must be set in Render
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production', // Use secure cookies in prod
+      secure: process.env.NODE_ENV === 'production', // Send only over HTTPS
+      httpOnly: true, // Prevent client-side JS access
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Allow cross-site for Google Auth
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
     },
   })
@@ -47,7 +57,7 @@ app.use(
 // --- Passport Middleware ---
 app.use(passport.initialize());
 app.use(passport.session());
-require('./utils/passportConfig'); // We will create this file
+require('./utils/passportConfig');
 
 // --- Apply Rate Limiting ---
 app.use('/api/', rateLimiter); // Apply rate limiter to all API routes
@@ -60,8 +70,6 @@ app.use('/api/analytics', analyticsRoutes);
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'UP', timestamp: new Date().toISOString() });
 });
-
-
 
 // --- 404 Error Handler ---
 app.use((req, res, next) => {
@@ -78,6 +86,7 @@ app.use((err, req, res, next) => {
 });
 
 // --- Start Server ---
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
