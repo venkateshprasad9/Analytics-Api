@@ -92,7 +92,7 @@ Since this is a Google OAuth flow, sessions are managed via cookies, which Postm
 
 To test any protected developer route (/api/auth/register, /api/analytics/event-summary, etc.) in Postman, follow these steps to retrieve the session cookie:
 
-Open your browser and visit the Primary Entry Point (/api/auth/google) to log in.
+Open your browser and visit the Primary Entry Point (http://localhost:3000/api/auth/google) to log in.
 
 After the redirect, open Developer Tools (F12), navigate to the Application tab, and copy the connect.sid cookie value from http://localhost:3000.
 
