@@ -54,36 +54,36 @@ git clone [https://github.com/venkateshprasad9/Analytics-Api.git](https://github
 cd Analytics-Api
 
 ### 3. Install Dependencies
-npm install
+* npm install
 
 ### 4. Set Up Environment Variables
-Create a .env file in the root of the project and add the following variables:
+* Create a .env file in the root of the project and add the following variables:
 
 
 
 ### Server
-NODE_ENV=development
-PORT=3000
-SESSION_SECRET=a_very_long_and_random_secret_string
+* **NODE_ENV** =development
+* **PORT** =3000
+* **SESSION_SECRET** =a_very_long_and_random_secret_string
 
 ### MongoDB (from MongoDB Atlas)
-MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/<db-name>
+* **MONGO_URI** =mongodb+srv://<username>:<password>@<cluster-url>/<db-name>
 
 ### Redis (from Redis Cloud)
-REDIS_HOST=<your-redis-host>
-REDIS_PORT=<your-redis-port>
-REDIS_PASSWORD=<your-redis-password>
+* **REDIS_HOST** =<your-redis-host>
+* **REDIS_PORT** =<your-redis-port>
+* **REDIS_PASSWORD** =<your-redis-password>
 
 #### Google OAuth (from Google Cloud Console)
-GOOGLE_CLIENT_ID=<your-google-client-id>
-GOOGLE_CLIENT_SECRET=<your-google-client-secret>
-CALLBACK_URL=http://localhost:3000/api/auth/google/callback
+* **GOOGLE_CLIENT_ID** =<your-google-client-id>
+* **GOOGLE_CLIENT_SECRET** =<your-google-client-secret>
+* **CALLBACK_URL** =http://localhost:3000/api/auth/google/callback
 
 ### 5. Run the Server
-npm run dev
+* npm run dev
 
 ### 6. Run the Tests
-npm test
+* npm test
 
 # Testing & Authentication Notes 
 
