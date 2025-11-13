@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -37,18 +38,18 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 // --- Session Configuration (Production Ready) ---
-// Trust the first proxy (Render's proxy)
+
 app.set('trust proxy', 1);
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET, // Must be set in Render
+    secret: process.env.SESSION_SECRET, 
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production', // Send only over HTTPS
-      httpOnly: true, // Prevent client-side JS access
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Allow cross-site for Google Auth
+      secure: process.env.NODE_ENV === 'production', 
+      httpOnly: true, 
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
     },
   })
@@ -60,7 +61,7 @@ app.use(passport.session());
 require('./utils/passportConfig');
 
 // --- Apply Rate Limiting ---
-app.use('/api/', rateLimiter); // Apply rate limiter to all API routes
+app.use('/api/', rateLimiter); 
 
 // --- API Routes ---
 app.use('/api/auth', authRoutes);
