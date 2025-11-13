@@ -61,20 +61,20 @@ Create a .env file in the root of the project and add the following variables:
 
 
 
-# Server
+### Server
 NODE_ENV=development
 PORT=3000
 SESSION_SECRET=a_very_long_and_random_secret_string
 
-# MongoDB (from MongoDB Atlas)
+### MongoDB (from MongoDB Atlas)
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/<db-name>
 
-# Redis (from Redis Cloud)
+### Redis (from Redis Cloud)
 REDIS_HOST=<your-redis-host>
 REDIS_PORT=<your-redis-port>
 REDIS_PASSWORD=<your-redis-password>
 
-# Google OAuth (from Google Cloud Console)
+#### Google OAuth (from Google Cloud Console)
 GOOGLE_CLIENT_ID=<your-google-client-id>
 GOOGLE_CLIENT_SECRET=<your-google-client-secret>
 CALLBACK_URL=http://localhost:3000/api/auth/google/callback
@@ -87,7 +87,7 @@ npm test
 
 # Testing & Authentication Notes 
 
-# Cookie Authentication Method (For All Protected Routes)
+### Cookie Authentication Method (For All Protected Routes)
 Since this is a Google OAuth flow, sessions are managed via cookies, which Postman cannot generate automatically.
 
 To test any protected developer route (/api/auth/register, /api/analytics/event-summary, etc.) in Postman, follow these steps to retrieve the session cookie:
@@ -98,9 +98,9 @@ After the redirect, open Developer Tools (F12), navigate to the Application tab,
 
 In Postman, set a header for the desired request:
 
-# KEY: Cookie
+### KEY: Cookie
 
-# VALUE: connect.sid=PASTE_COPIED_VALUE
+### VALUE: connect.sid=PASTE_COPIED_VALUE
 
 All tests requiring user authentication (Groups 1 and 2 in the Postman documentation) must use this Cookie header.
 
